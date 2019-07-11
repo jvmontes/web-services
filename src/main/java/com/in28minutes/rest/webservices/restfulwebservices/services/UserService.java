@@ -1,14 +1,16 @@
-package com.in28minutes.rest.webservices.restfulwebservices.user;
+package com.in28minutes.rest.webservices.restfulwebservices.services;
 
-import org.springframework.stereotype.Component;
+import com.in28minutes.rest.webservices.restfulwebservices.user.User;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
-public class UserDTOService {
+@Service
+public class UserService {
 
+    // This would come from a database query.
     private static List<User> users = new ArrayList<>();
 
     private static int usersCount = 3;
@@ -18,6 +20,7 @@ public class UserDTOService {
         users.add(new User(2, "Bob", new Date()));
         users.add(new User(3, "Carlos", new Date()));
     }
+
 
     public List<User> findAll() {
         return users;

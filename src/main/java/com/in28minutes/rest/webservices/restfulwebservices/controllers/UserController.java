@@ -1,6 +1,8 @@
-package com.in28minutes.rest.webservices.restfulwebservices.user;
+package com.in28minutes.rest.webservices.restfulwebservices.controllers;
 
 import com.in28minutes.rest.webservices.restfulwebservices.exception.UserNotFoundException;
+import com.in28minutes.rest.webservices.restfulwebservices.user.User;
+import com.in28minutes.rest.webservices.restfulwebservices.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,10 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class UserResource {
+public class UserController {
 
     @Autowired
-    private UserDTOService service;
+    private UserService service;
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers() {
@@ -33,7 +35,11 @@ public class UserResource {
     public ResponseEntity createUser(@RequestBody User user) {
         User savedUser = service.save(user);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
+        URI location = ServletUriComponentsBuilder.
+                fromCurrentRequest().
+                path("/{id}").
+                buildAndExpand(savedUser.getId()).
+                toUri();
 
         return ResponseEntity.created(location).build();
     }

@@ -1,41 +1,39 @@
 package com.in28minutes.rest.webservices.restfulwebservices;
 
 import com.in28minutes.rest.webservices.restfulwebservices.user.User;
-import com.in28minutes.rest.webservices.restfulwebservices.user.UserDTOService;
+import com.in28minutes.rest.webservices.restfulwebservices.services.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestEmptyUserDTOService {
-    private UserDTOService userDTOService;
+public class TestEmptyUserService {
+    private UserService userService;
 
     @Before
     public void createUserService() {
-        userDTOService = new UserDTOService();
+        userService = new UserService();
 
     }
 
     @Test
     public void testDefaultUserServiceHasThreeUsers() {
-        assertEquals(new ArrayList<User>(), userDTOService.findAll());
+        assertEquals(new ArrayList<User>(), userService.findAll());
     }
 
     @Test
     public void testSavingNewUserAddsUserToList() {
-        User newUser = userDTOService.save(new User(4, "David", new Date()));
+        User newUser = userService.save(new User(4, "David", new Date()));
 
-        assertEquals(4, userDTOService.findAll().size());
+        assertEquals(4, userService.findAll().size());
     }
 
     @After
     public void resetUserService() {
-        userDTOService = new UserDTOService();
+        userService = new UserService();
     }
 }
